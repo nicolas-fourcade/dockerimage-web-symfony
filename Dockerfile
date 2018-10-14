@@ -1,7 +1,9 @@
 FROM ubuntu:16.04
 ADD . /app
-RUN apt-get update
-RUN apt-get install -y php apache2 libapache2-mod-php7.0 php-mysql php-intl git git-core curl php-curl php-xml composer zip unzip php-zip
+
+ADD ondrej-ubuntu-php-xenial.list /etc/apt/sources.list.d/
+RUN apt-get update -y --fix-missing
+RUN apt-get install -y --allow-unauthenticated php apache2 libapache2-mod-php php7.1-sqlite3 php7.1-xdebug php7.1-intl curl php7.1-curl php7.1-xml composer zip unzip php7.1-zip
 # Configure Apache
 RUN rm -rf /var/www/* \
     && a2enmod rewrite \
