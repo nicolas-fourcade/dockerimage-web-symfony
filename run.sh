@@ -4,7 +4,13 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 apt-get update && apt-get install yarn -y
 mkdir -p app/cache /app/logs
-
+a2enmod php7.1
+update-alternatives --set php /usr/bin/php7.1
+update-alternatives --set phar /usr/bin/phar7.2
+update-alternatives --set phar.phar /usr/bin/phar.phar7.1
+update-alternatives --set phpize /usr/bin/phpize7.1
+update-alternatives --set php-config /usr/bin/php-config7.1
+systemctl restart apache2
 touch app/logs/prod.log
 touch app/logs/dev.log
 chgrp -R www-data .
